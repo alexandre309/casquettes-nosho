@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casquettes Nosho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday work tool, friendly and exact, shared with the team to pick caps
+   IDEA the embroiderer's sample wall: every Retro Trucker colourway hung in rows, a tray of logo patches to drag on
+   PICTURE the wall of caps itself, each drawn front-on with the Nosho logo stitched on its front panel
+   COLOUR white ground, ink #14202B, Nosho orange #FF900B for actions and choices, soft grey stage behind each cap
+   TYPE Jost (geometric, close to the nosho wordmark) for titles, Inter for text
+   LAYOUT modest title and figures, sticky logo tray + filters, cap grid; phone: same order, tray compact, favourites bar at the bottom */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f151c);--ink:light-dark(#14202B,#E9EEF3);--mute:light-dark(#566473,#9AA8B6);--line:light-dark(#DFE5EB,#26313d);--stage:light-dark(#EEF1F4,#18212b);--card:light-dark(#ffffff,#121a22);--or:#FF900B;--orD:light-dark(#B45F00,#FFB25C);--orT:light-dark(#FFF1E0,#33220f);--ok:light-dark(#1F7A4D,#6FD1A0);--okT:light-dark(#E3F3EA,#13301f);--mid:light-dark(#7A5A00,#F0C760);--midT:light-dark(#FFF4D6,#30270c);--no:light-dark(#A3361B,#FF9C80);--noT:light-dark(#FBE6E0,#3a1a12)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+[hidden]{display:none!important}
+html{scroll-padding-top:150px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip;padding-bottom:90px}
+h1{font:600 clamp(32px,4.4vw,46px)/1.05 Jost,Futura,system-ui,sans-serif;letter-spacing:-.02em;margin:0}
+.band{padding-inline:max(4vw,16px)}
+.wrap{max-width:1320px;margin:0 auto}
+header{padding-block:28px 18px}
+.head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:end}
+.lead{margin:10px 0 0;color:var(--mute);max-width:62ch}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.figs div{border-top:2px solid var(--ink);padding-top:8px}
+.figs b{display:block;font:600 clamp(26px,3vw,34px)/1 Jost,system-ui,sans-serif}
+.figs span{font-size:13px;color:var(--mute)}
+.bar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-block:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding-block:10px}
+.tray{display:flex;gap:8px;flex-wrap:wrap}
+.lt{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 12px 6px 6px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font:inherit;text-align:left}
+.lt:hover{border-color:var(--or)}
+.lt[aria-pressed=true]{border-color:var(--or);box-shadow:0 0 0 2px var(--or)}
+.lt .pv{width:62px;height:38px;border-radius:8px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:none}
+.lt .pv svg{width:52px;height:26px}
+.lt b{display:block;font-size:14px;font-weight:600;line-height:1.2}
+.lt small{display:block;font-size:12.5px;color:var(--mute)}
+.lt em{display:none;font-style:normal;font-size:13px;font-weight:600}
+.hint{font-size:13.5px;color:var(--mute);flex:1 1 200px}
+.armed-hint{color:var(--orD);font-weight:600}
+.filters{display:flex;gap:6px;overflow-x:auto;padding-block:2px;flex:1 1 auto;max-width:100%}
+.filters button,.acts button,.tools button,.favbar button{min-height:40px;padding:0 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:500 14px Inter,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button span{opacity:.65;margin-left:4px}
+.acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:14px}
+.filters button{flex:none}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+main{padding-block:18px 30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,232px),1fr));gap:14px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s,border-color .15s}
+.card.sel{border-color:var(--or);box-shadow:0 0 0 2px var(--or)}
+.card.over{border-color:var(--or);box-shadow:0 0 0 3px var(--or)}
+.armed .stage{cursor:copy}
+.stage{background:var(--stage);padding:10px 8px 6px;cursor:pointer}
+.ph{position:relative;max-width:420px;margin:0 auto}
+.ph img{display:block;width:100%;height:auto}
+.ov{position:absolute;inset:0;width:100%;height:100%}
+.swc{width:28px;height:21px;border-radius:4px;border:1px solid var(--line);flex:none;margin-top:2px;object-fit:cover}
+.lg{cursor:move;touch-action:none}
+.meta{display:flex;align-items:flex-start;gap:8px;padding:10px 8px 0 12px}
+.nm{flex:1}
+.nm b{display:block;font-size:15px;font-weight:600;line-height:1.25}
+.nm span{display:block;font-size:12.5px;color:var(--mute);line-height:1.35;margin-top:2px}
+.ic{width:40px;height:40px;flex:none;border:0;border-radius:10px;background:none;color:var(--mute);cursor:pointer;display:grid;place-items:center}
+.ic:hover{background:var(--stage);color:var(--ink)}
+.ic svg{width:20px;height:20px}
+.fav[aria-pressed=true]{color:var(--or)}
+.fav[aria-pressed=true] path{fill:currentColor}
+.chip{margin:8px 12px 12px;font-size:12.5px;font-weight:600;border-radius:8px;padding:5px 9px;align-self:flex-start}
+.chip.ok{background:var(--okT);color:var(--ok)}.chip.mid{background:var(--midT);color:var(--mid)}.chip.no{background:var(--noT);color:var(--no)}.chip.none{background:var(--stage);color:var(--mute)}
+.tools{border-top:1px solid var(--line);padding:12px;display:grid;gap:12px;font-size:14px}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.tools .seg button{border-radius:10px;padding:0 8px;font-size:13px}
+.tools button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lab{font-size:13px;color:var(--mute);margin-bottom:6px}
+.sw{display:flex;flex-wrap:wrap;gap:6px}
+.tools .s{width:34px;height:34px;min-height:0;border-radius:50%;border:1px solid rgba(128,128,128,.55);background:var(--c);cursor:pointer;padding:0}
+.tools .s[aria-pressed=true]{background:var(--c);border-color:rgba(128,128,128,.55);box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--or)}
+details summary{cursor:pointer;font-size:13px;color:var(--mute);min-height:32px;display:flex;align-items:center}
+details .sw{margin-top:6px}
+.size{display:flex;align-items:center;gap:10px}
+.size input{flex:1;accent-color:var(--or);height:32px}
+.size output{font-variant-numeric:tabular-nums;width:3.2em;text-align:right;color:var(--mute)}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.tools .row button{border-radius:10px;font-size:13px;padding:0 10px}
+.ghost{position:fixed;left:0;top:0;z-index:50;pointer-events:none;width:96px;height:48px;margin:-24px 0 0 -48px;border-radius:10px;background:var(--card);box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}
+.ghost svg{width:80px;height:34px}
+.send{margin:0 12px 12px;min-height:42px;border-radius:12px;border:1px solid var(--or);background:var(--or);color:#14202B;font:600 14px Inter,system-ui,sans-serif;cursor:pointer}
+.send.on{background:var(--orT);color:var(--orD)}
+dialog{width:min(680px,calc(100vw - 24px));max-height:calc(100dvh - 24px);border:0;border-radius:18px;padding:0;background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,16,22,.55)}
+#reqf{padding:18px 20px 20px;display:grid;gap:14px}
+.rh{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rh h2{font:600 26px/1.1 Jost,system-ui,sans-serif;margin:0}
+.rl{display:grid;gap:10px}
+.ri{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:8px}
+.ri img{width:120px;height:auto;aspect-ratio:1024/935;border-radius:8px;background:var(--stage);display:block}
+.ri b{display:block;font-size:15px}
+.ri span{display:block;font-size:13px;color:var(--mute)}
+.rq{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:8px;font-size:14px}
+.rq label{display:flex;align-items:center;gap:6px}
+.rq input,.rq select{font:16px Inter,system-ui,sans-serif;min-height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;background:var(--bg);color:var(--ink)}
+.rq input{width:5em}
+.lnk{background:none;border:0;color:var(--orD);font:600 14px Inter,system-ui,sans-serif;cursor:pointer;min-height:40px;padding:0 4px;text-decoration:underline}
+.ff{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+.ff label{display:grid;gap:4px;font-size:13px;color:var(--mute)}
+.ff .w{grid-column:1/-1}
+.ff input,.ff textarea{font:16px Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-height:44px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.st{margin:0;font-size:14px;min-height:1.4em}
+.st.ok{color:var(--ok);font-weight:600}.st.err{color:var(--no)}
+.ra{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.ra button{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px Inter,system-ui,sans-serif;cursor:pointer}
+.ra .pri{background:var(--or);border-color:var(--or);color:#14202B}
+.ra button:disabled{opacity:.5;cursor:default}
+@media(max-width:600px){.ff{grid-template-columns:1fr}.ri{grid-template-columns:90px minmax(0,1fr)}.ri img{width:90px}.send{margin:0 10px 10px;font-size:13px}}
+.favbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink);color:var(--bg);transform:translateY(110%);transition:transform .2s}
+.favbar.on{transform:none}
+.favbar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-block:12px}
+.favbar b{font:600 18px Jost,system-ui,sans-serif}
+.favbar input{font:16px Inter,system-ui,sans-serif;min-height:40px;padding:0 12px;border-radius:10px;border:1px solid transparent;width:11em}
+.favbar button{background:var(--or);color:#14202B;border-color:var(--or);font-weight:600}
+.favbar .list{flex:1 1 260px;font-size:13px;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 12px 10px 16px;display:flex;gap:12px;align-items:center;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast button{background:none;border:1px solid currentColor;color:inherit;border-radius:8px;min-height:34px;padding:0 10px;font:600 13px Inter,sans-serif;cursor:pointer}
+.empty{grid-column:1/-1;padding:40px 0;color:var(--mute);text-align:center}
+.foot{color:var(--mute);font-size:13px;margin-top:22px}
+@media(max-width:860px){.head{grid-template-columns:1fr}}
+@media(max-width:600px){header{padding-block:20px 14px}.lead{font-size:15px}.bar .wrap{gap:8px}.tray{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:6px}.lt{flex-direction:column;gap:3px;padding:5px;min-height:0;text-align:center}.lt .pv{width:100%;height:30px}.lt .pv svg{width:44px;height:20px}.lt b,.lt small{display:none}.lt em{display:block}.hint{display:none}.filters{width:100%}.acts{justify-content:flex-start}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card.sel{grid-column:1/-1}.meta{padding:8px 2px 0 10px}.nm b{font-size:14px}.ic{width:36px;height:36px}.chip{margin:6px 10px 10px}.figs b{font-size:24px}html{scroll-padding-top:130px}}
+@media(prefers-reduced-motion:reduce){.favbar,.card{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+<defs>
+<path id="lgO" d="M709,1723C708,1723 706,1722 705,1722C703,1721 701,1720 700,1720C696,1719 681,1703 676,1696C671,1688 666,1679 663,1674C657,1660 656,1658 656,1657C656,1656 655,1655 655,1654C654,1652 653,1650 653,1649C652,1648 651,1644 650,1642C647,1632 646,1630 644,1623C640,1610 638,1602 636,1596C634,1585 632,1576 630,1572C630,1569 629,1563 628,1560C628,1556 627,1551 626,1549C625,1545 623,1531 621,1518C620,1515 619,1508 618,1504C618,1500 616,1491 616,1485C615,1479 614,1472 614,1470C614,1467 613,1459 612,1450C612,1442 611,1433 610,1430C610,1427 609,1415 608,1404C608,1392 606,1375 606,1366C604,1345 604,1243 606,1221C606,1212 608,1196 608,1184C609,1174 610,1162 610,1158C611,1155 612,1146 612,1137C613,1129 614,1121 614,1118C614,1116 615,1109 616,1102C617,1096 618,1089 618,1087C619,1085 620,1080 620,1074C621,1070 622,1062 622,1058C626,1041 627,1034 628,1028C628,1025 630,1020 630,1017C632,1011 635,1000 637,992C638,986 640,978 644,965C646,958 647,956 650,946C651,944 652,940 653,938C654,936 655,934 655,934C656,933 656,932 656,931C656,930 657,928 663,914C673,892 689,873 702,867C710,864 720,864 728,867C738,872 746,880 755,893C759,899 760,900 767,914C770,920 772,925 772,926C772,927 773,929 774,930C775,932 776,934 776,936C776,937 777,938 778,940C778,941 779,944 780,946C781,950 784,958 786,963C786,965 788,968 788,971C788,974 790,978 790,980C793,988 797,1005 800,1018C800,1022 802,1027 802,1029C803,1032 804,1036 804,1039C804,1042 806,1048 806,1052C808,1062 810,1071 811,1081C812,1085 812,1091 813,1095C814,1099 814,1106 815,1112C816,1117 817,1126 818,1132C818,1138 819,1147 820,1152C820,1157 821,1169 822,1178C822,1188 823,1202 824,1210C824,1217 825,1224 826,1224C829,1225 830,1220 832,1201C832,1194 834,1184 834,1180C835,1175 836,1170 836,1168C836,1165 837,1158 838,1152C839,1146 840,1138 841,1134C843,1118 849,1090 854,1072C855,1068 856,1063 856,1060C857,1058 858,1054 858,1053C859,1052 860,1049 860,1046C861,1044 862,1041 862,1039C864,1035 866,1028 868,1021C871,1014 873,1008 874,1005C875,1003 876,1002 876,1001C876,999 887,976 890,972C896,963 898,960 901,957C902,955 904,953 904,953C904,951 918,941 922,939C929,937 939,936 945,939C955,943 966,953 975,968C980,975 992,999 992,1001C992,1002 993,1004 994,1006C995,1008 996,1010 996,1011C996,1012 997,1013 997,1014C998,1016 999,1019 1000,1022C1001,1025 1002,1027 1002,1028C1002,1028 1003,1030 1004,1032C1004,1035 1005,1037 1005,1038C1006,1040 1009,1050 1011,1060C1012,1063 1013,1068 1014,1071C1015,1074 1017,1081 1018,1086C1024,1113 1024,1117 1027,1134C1028,1138 1029,1145 1030,1149C1030,1153 1031,1161 1032,1166C1032,1172 1033,1179 1034,1182C1035,1185 1036,1193 1036,1200C1037,1216 1039,1223 1041,1224C1043,1225 1044,1222 1046,1210C1048,1200 1051,1185 1053,1176C1056,1163 1058,1158 1059,1156C1059,1155 1060,1153 1060,1151C1061,1148 1062,1146 1063,1145C1063,1144 1064,1142 1064,1141C1064,1139 1072,1118 1075,1114C1075,1113 1076,1110 1077,1109C1083,1095 1103,1068 1114,1059C1122,1054 1133,1049 1140,1049C1144,1049 1156,1053 1158,1055C1159,1055 1160,1056 1161,1056C1162,1056 1182,1075 1185,1080C1192,1088 1212,1127 1212,1131C1212,1132 1213,1133 1213,1135C1217,1141 1225,1168 1228,1182C1228,1186 1229,1191 1230,1192C1230,1194 1231,1198 1232,1201C1232,1205 1233,1210 1234,1213C1234,1216 1235,1222 1236,1226C1236,1231 1237,1241 1238,1248C1240,1269 1240,1318 1238,1341C1237,1351 1235,1363 1234,1368C1234,1373 1232,1380 1232,1384C1231,1392 1225,1416 1222,1426C1221,1430 1220,1434 1219,1436C1219,1438 1218,1440 1217,1442C1217,1443 1216,1444 1216,1445C1216,1447 1213,1455 1210,1462C1209,1464 1208,1466 1208,1466C1208,1467 1199,1486 1196,1491C1190,1502 1187,1505 1182,1512C1176,1519 1162,1532 1161,1532C1160,1532 1159,1533 1158,1533C1156,1535 1144,1539 1140,1539C1133,1539 1121,1534 1115,1529C1108,1524 1105,1521 1099,1513C1095,1508 1090,1502 1088,1499C1083,1491 1078,1482 1077,1479C1076,1478 1075,1475 1074,1472C1070,1464 1068,1459 1068,1458C1068,1458 1067,1455 1066,1453C1065,1451 1064,1449 1064,1448C1064,1447 1063,1444 1062,1442C1061,1440 1060,1438 1060,1436C1060,1435 1060,1433 1059,1432C1058,1430 1057,1426 1053,1412C1051,1403 1048,1388 1046,1378C1044,1364 1044,1364 1042,1364C1038,1364 1038,1364 1035,1393C1033,1413 1032,1421 1030,1432C1029,1438 1028,1447 1027,1450C1026,1454 1026,1460 1025,1463C1024,1466 1023,1473 1022,1479C1021,1485 1019,1493 1018,1497C1017,1501 1016,1506 1016,1507C1016,1508 1015,1512 1014,1515C1013,1518 1012,1521 1012,1522C1012,1524 1010,1530 1006,1543C1006,1546 1004,1550 1004,1552C1002,1556 1002,1558 998,1569C986,1601 971,1628 956,1639C948,1645 943,1648 934,1648C925,1648 919,1645 910,1638C906,1634 892,1618 892,1616C892,1616 891,1614 890,1612C888,1609 883,1600 878,1588C876,1585 870,1569 867,1560C866,1556 862,1545 861,1540C860,1537 859,1534 858,1532C858,1530 856,1526 856,1523C856,1520 855,1516 854,1515C854,1514 853,1512 853,1510C852,1506 851,1501 846,1481C846,1477 844,1471 844,1468C844,1465 843,1459 842,1454C838,1437 833,1395 831,1377C830,1367 829,1363 826,1364C825,1365 824,1368 824,1379C823,1396 820,1433 817,1461C815,1483 810,1517 806,1536C806,1540 804,1546 804,1550C803,1554 803,1558 802,1559C802,1561 800,1566 800,1570C797,1583 796,1588 794,1594C793,1596 792,1601 791,1604C789,1616 786,1625 782,1636C781,1638 780,1641 780,1642C780,1643 779,1645 778,1647C777,1649 776,1652 776,1653C776,1654 775,1656 774,1658C773,1660 772,1662 772,1662C772,1663 764,1679 760,1687C752,1701 738,1716 728,1721C722,1723 714,1724 709,1723Z"/>
+<path id="lgI" d="M2996,1603C2983,1602 2963,1598 2960,1597C2959,1596 2957,1596 2956,1596C2954,1596 2939,1592 2934,1590C2928,1587 2910,1578 2908,1577C2885,1563 2869,1550 2857,1535C2851,1528 2840,1514 2840,1512C2840,1512 2839,1511 2838,1509C2834,1505 2835,1502 2842,1498C2845,1496 2852,1491 2856,1488C2861,1484 2870,1478 2876,1474C2888,1466 2902,1456 2913,1448C2917,1446 2922,1442 2924,1440C2927,1438 2930,1436 2931,1435C2933,1434 2936,1434 2936,1437C2936,1440 2945,1454 2952,1461C2966,1476 2987,1483 3010,1483C3025,1483 3043,1479 3050,1474C3051,1473 3053,1472 3053,1472C3055,1472 3068,1460 3072,1456C3077,1450 3078,1447 3082,1440C3084,1433 3084,1432 3084,1419C3084,1405 3084,1404 3078,1392C3074,1385 3064,1374 3055,1368C3051,1365 3047,1363 3046,1363C3046,1363 3043,1362 3041,1360C3038,1358 3034,1355 3030,1353C3026,1351 3023,1350 3022,1349C3021,1348 3016,1346 3012,1344C3007,1342 3001,1339 2998,1338C2996,1337 2992,1335 2988,1334C2979,1329 2966,1323 2964,1322C2963,1321 2961,1320 2960,1320C2959,1319 2957,1318 2956,1318C2955,1317 2953,1316 2952,1316C2951,1315 2949,1315 2948,1314C2947,1314 2943,1312 2940,1310C2928,1303 2919,1298 2918,1297C2917,1297 2916,1296 2916,1296C2914,1296 2909,1292 2898,1284C2881,1271 2855,1240 2848,1224C2848,1223 2847,1221 2846,1220C2840,1210 2833,1187 2832,1168C2831,1154 2832,1127 2834,1122C2835,1120 2836,1116 2836,1114C2837,1111 2838,1107 2838,1105C2839,1103 2841,1098 2843,1094C2844,1090 2846,1086 2846,1086C2846,1085 2848,1081 2850,1078C2865,1050 2889,1026 2918,1009C2924,1006 2927,1004 2938,999C2946,995 2960,991 2969,989C2972,988 2977,987 2982,986C2993,984 3032,984 3045,986C3050,987 3056,989 3058,989C3066,990 3075,993 3079,995C3080,995 3082,996 3083,996C3084,996 3086,997 3089,998C3091,999 3096,1001 3099,1003C3102,1004 3105,1006 3106,1006C3107,1006 3110,1008 3113,1010C3116,1011 3121,1014 3125,1017C3128,1020 3133,1023 3135,1025C3145,1031 3169,1057 3172,1065C3174,1068 3172,1069 3165,1074C3162,1077 3153,1083 3145,1088C3137,1094 3124,1103 3116,1108C3107,1114 3096,1122 3091,1126C3085,1129 3080,1133 3079,1134C3077,1135 3077,1135 3075,1133C3065,1122 3059,1116 3051,1112C3038,1106 3030,1104 3014,1104C3004,1104 3000,1104 2995,1106C2992,1107 2988,1108 2988,1108C2986,1108 2979,1112 2973,1116C2966,1120 2958,1128 2955,1135C2952,1141 2952,1142 2952,1151C2952,1159 2952,1162 2954,1167C2958,1175 2963,1182 2970,1187C2977,1192 2983,1196 2984,1196C2985,1196 2990,1199 2995,1202C3001,1205 3014,1212 3024,1216C3033,1221 3042,1226 3043,1226C3044,1227 3046,1228 3047,1228C3048,1229 3050,1230 3051,1230C3052,1231 3054,1232 3055,1232C3056,1233 3058,1234 3059,1234C3060,1235 3062,1236 3063,1236C3064,1237 3066,1237 3067,1238C3068,1238 3072,1240 3076,1242C3079,1244 3086,1248 3090,1250C3095,1253 3100,1255 3101,1256C3104,1258 3105,1258 3110,1260C3112,1262 3114,1263 3116,1264C3129,1270 3162,1301 3173,1319C3181,1331 3182,1332 3184,1336C3184,1337 3185,1339 3186,1340C3187,1342 3190,1347 3192,1354C3195,1360 3198,1369 3201,1380C3207,1406 3206,1448 3197,1472C3191,1489 3185,1502 3179,1511C3177,1513 3176,1515 3176,1516C3176,1516 3173,1520 3169,1526C3153,1547 3137,1561 3112,1577C3107,1580 3089,1588 3088,1588C3087,1588 3086,1588 3085,1589C3084,1590 3075,1593 3066,1596C3044,1602 3015,1605 2996,1603ZM3301,1603C3299,1602 3299,746 3301,745C3303,744 3418,744 3418,745C3419,746 3419,808 3419,884C3419,1022 3419,1023 3421,1024C3423,1025 3423,1025 3425,1023C3426,1022 3428,1020 3429,1020C3430,1019 3433,1018 3436,1016C3442,1013 3459,1004 3466,1002C3469,1001 3473,999 3474,998C3484,994 3509,988 3525,985C3558,980 3596,981 3628,988C3640,991 3657,996 3662,998C3664,998 3668,1000 3672,1002C3679,1004 3696,1013 3702,1016C3705,1018 3707,1019 3708,1020C3710,1020 3723,1029 3724,1030C3724,1030 3727,1033 3732,1036C3737,1039 3756,1056 3762,1062C3780,1081 3792,1097 3803,1117C3806,1122 3808,1126 3809,1127C3812,1133 3820,1150 3820,1151C3820,1152 3821,1153 3821,1154C3822,1156 3823,1158 3824,1160C3824,1162 3825,1164 3826,1166C3826,1167 3827,1170 3828,1172C3828,1175 3829,1178 3830,1179C3830,1180 3831,1184 3832,1186C3832,1189 3833,1194 3834,1196C3834,1198 3835,1205 3836,1211C3837,1216 3838,1224 3838,1227C3839,1233 3840,1601 3838,1603C3838,1604 3723,1604 3721,1603C3719,1602 3719,1597 3719,1422C3719,1251 3719,1241 3717,1229C3716,1222 3715,1215 3714,1214C3714,1213 3713,1211 3713,1209C3712,1205 3710,1199 3706,1192C3706,1191 3705,1188 3704,1187C3703,1186 3702,1182 3700,1180C3699,1178 3697,1175 3697,1174C3691,1163 3677,1148 3663,1135C3656,1129 3633,1115 3629,1115C3629,1115 3628,1114 3627,1114C3626,1112 3618,1109 3610,1108C3608,1107 3605,1106 3604,1106C3602,1104 3580,1102 3569,1102C3556,1102 3538,1104 3532,1106C3529,1107 3527,1108 3526,1108C3524,1108 3507,1115 3503,1117C3502,1118 3500,1119 3498,1120C3494,1122 3478,1132 3474,1136C3455,1152 3443,1168 3434,1188C3432,1191 3430,1195 3430,1196C3428,1199 3424,1212 3422,1222L3420,1232L3419,1417C3419,1519 3419,1603 3418,1603C3418,1604 3303,1604 3301,1603ZM2432,1600C2422,1600 2411,1599 2406,1598C2402,1597 2396,1596 2392,1595C2381,1593 2361,1588 2350,1584C2346,1582 2341,1580 2340,1580C2334,1578 2304,1564 2298,1560C2296,1558 2292,1556 2288,1554C2285,1552 2281,1549 2278,1548C2276,1546 2272,1543 2269,1541C2266,1539 2262,1536 2261,1535C2260,1534 2256,1530 2253,1528C2242,1519 2224,1501 2212,1486C2197,1467 2194,1462 2185,1446C2182,1441 2180,1437 2179,1436C2178,1434 2174,1425 2170,1418C2169,1415 2167,1411 2166,1410C2166,1408 2165,1405 2164,1404C2164,1402 2162,1397 2160,1394C2154,1376 2148,1348 2145,1322C2144,1310 2144,1256 2146,1250C2146,1248 2148,1242 2148,1238C2149,1233 2150,1227 2151,1225C2151,1222 2152,1220 2152,1218C2152,1217 2153,1213 2154,1210C2155,1206 2156,1202 2157,1200C2159,1192 2166,1174 2167,1172C2168,1172 2168,1171 2168,1170C2168,1169 2180,1143 2184,1136C2186,1134 2187,1132 2188,1131C2191,1124 2208,1100 2218,1089C2229,1077 2255,1051 2260,1049C2261,1048 2264,1046 2266,1044C2278,1034 2300,1021 2318,1012C2323,1010 2328,1008 2329,1007C2331,1006 2343,1001 2352,998C2355,997 2361,995 2364,994C2368,993 2374,992 2377,991C2380,990 2384,989 2387,988C2390,988 2394,987 2397,986C2400,986 2408,985 2414,984C2420,984 2430,983 2435,982C2440,982 2448,981 2452,981C2463,981 2503,985 2510,986C2513,987 2518,988 2520,988C2522,989 2527,990 2530,991C2533,992 2539,993 2542,994C2546,995 2552,997 2554,998C2564,1001 2576,1006 2578,1007C2579,1008 2584,1010 2588,1012C2593,1014 2603,1019 2609,1023C2626,1032 2633,1038 2656,1056C2664,1062 2686,1085 2695,1096C2705,1109 2714,1122 2723,1137C2729,1148 2740,1170 2740,1172C2740,1173 2740,1174 2741,1174C2742,1175 2743,1178 2744,1180C2744,1184 2746,1186 2746,1186C2746,1187 2747,1189 2748,1191C2748,1194 2749,1196 2749,1198C2752,1203 2758,1232 2762,1255C2764,1271 2764,1313 2762,1324C2762,1327 2760,1334 2760,1339C2759,1344 2758,1350 2758,1352C2758,1353 2756,1358 2756,1362C2754,1370 2751,1380 2749,1387C2745,1400 2742,1405 2738,1416C2734,1423 2726,1440 2724,1444C2722,1447 2721,1449 2720,1450C2716,1459 2690,1493 2677,1507C2667,1517 2649,1533 2639,1540C2633,1545 2617,1556 2615,1556C2614,1557 2612,1558 2610,1560C2603,1564 2573,1578 2568,1580C2566,1580 2561,1582 2558,1584C2550,1586 2541,1589 2531,1592C2528,1592 2523,1594 2520,1594C2516,1595 2512,1596 2510,1596C2508,1596 2504,1597 2500,1598C2491,1600 2458,1601 2432,1600ZM4212,1600C4204,1600 4194,1598 4190,1598C4186,1597 4182,1596 4180,1596C4179,1596 4175,1595 4172,1594C4168,1594 4163,1592 4160,1592C4147,1588 4132,1584 4128,1581C4126,1581 4125,1580 4124,1580C4122,1580 4090,1565 4082,1560C4080,1558 4076,1556 4072,1554C4067,1551 4058,1544 4046,1536C4040,1531 4023,1516 4016,1508C4006,1498 3991,1481 3986,1474C3969,1449 3964,1439 3954,1418C3949,1406 3948,1404 3948,1403C3948,1402 3947,1400 3946,1399C3946,1398 3945,1396 3944,1393C3944,1391 3942,1388 3942,1385C3938,1373 3936,1367 3936,1364C3936,1363 3936,1361 3935,1359C3934,1356 3931,1338 3929,1324C3928,1313 3928,1257 3930,1250C3930,1248 3931,1242 3932,1237C3933,1232 3934,1226 3934,1224C3935,1221 3936,1216 3937,1214C3939,1205 3941,1197 3942,1195C3943,1193 3944,1192 3944,1191C3944,1188 3956,1160 3958,1156C3959,1155 3960,1153 3960,1152C3962,1148 3962,1148 3964,1144C3966,1141 3968,1138 3968,1136C3970,1133 3971,1132 3979,1120C3989,1104 4003,1087 4017,1073C4029,1061 4041,1050 4044,1049C4045,1048 4048,1046 4050,1044C4061,1035 4084,1021 4102,1012C4107,1010 4112,1007 4113,1007C4115,1006 4129,1000 4136,998C4149,994 4148,994 4166,990C4181,986 4188,985 4198,984C4205,984 4214,983 4219,982C4224,982 4232,981 4236,981C4247,981 4287,985 4294,986C4297,987 4302,988 4304,988C4306,989 4311,990 4314,991C4317,992 4323,993 4326,994C4330,995 4336,997 4338,998C4348,1001 4360,1006 4362,1007C4363,1008 4368,1010 4372,1012C4383,1017 4402,1028 4410,1033C4412,1035 4416,1037 4418,1038C4443,1056 4474,1088 4490,1111C4499,1123 4502,1129 4503,1131C4504,1132 4505,1134 4506,1135C4508,1138 4520,1162 4520,1163C4520,1164 4521,1165 4521,1166C4522,1167 4523,1169 4524,1170C4524,1172 4525,1175 4526,1176C4527,1179 4529,1185 4532,1192C4532,1194 4534,1199 4534,1202C4538,1214 4541,1226 4543,1238C4547,1264 4547,1270 4547,1291C4547,1312 4547,1320 4543,1344C4542,1353 4538,1370 4537,1371C4537,1372 4536,1375 4536,1378C4534,1384 4532,1392 4530,1396C4529,1398 4527,1402 4526,1406C4523,1414 4515,1430 4513,1434C4512,1435 4512,1437 4511,1438C4510,1439 4509,1442 4508,1444C4506,1447 4504,1450 4503,1452C4497,1463 4481,1484 4470,1497C4457,1511 4438,1529 4428,1537C4426,1538 4422,1541 4419,1543C4415,1546 4402,1555 4393,1560C4385,1565 4358,1578 4352,1580C4350,1580 4345,1582 4342,1584C4330,1588 4310,1593 4298,1595C4295,1596 4289,1597 4285,1598C4281,1598 4275,1599 4271,1600C4260,1600 4227,1601 4212,1600ZM1504,1597C1504,1596 1504,1512 1504,1410C1505,1241 1505,1225 1506,1216C1507,1210 1508,1203 1509,1200C1511,1190 1514,1176 1514,1175C1515,1174 1516,1172 1516,1169C1517,1166 1519,1161 1520,1158C1521,1154 1522,1151 1526,1142C1528,1137 1538,1118 1540,1114C1542,1110 1555,1091 1560,1085C1572,1067 1599,1042 1624,1025C1629,1021 1649,1010 1655,1007C1664,1002 1670,1000 1671,1000C1671,1000 1673,999 1675,999C1677,997 1682,996 1692,992C1696,991 1702,990 1714,986C1720,985 1737,982 1751,981C1762,980 1786,980 1797,981C1811,982 1829,985 1833,986C1835,987 1839,988 1842,989C1848,990 1851,991 1860,994C1863,995 1866,996 1867,996C1868,996 1870,997 1872,998C1875,999 1877,1000 1877,1000C1879,1000 1902,1011 1910,1016C1914,1018 1928,1027 1932,1030C1946,1041 1953,1047 1965,1058C1981,1075 1991,1087 2002,1105C2005,1110 2008,1114 2009,1116C2010,1118 2020,1137 2022,1143C2023,1146 2025,1149 2026,1150C2026,1152 2027,1155 2028,1156C2028,1158 2029,1161 2030,1162C2031,1164 2033,1172 2035,1181C2036,1184 2037,1188 2038,1190C2038,1193 2039,1200 2040,1204C2041,1210 2042,1216 2042,1218C2043,1224 2045,1592 2044,1597L2043,1599L1984,1599C1932,1599 1925,1599 1925,1597C1924,1597 1924,1514 1924,1414L1924,1231L1922,1220C1918,1206 1914,1193 1911,1187C1910,1186 1910,1184 1909,1183C1908,1182 1908,1180 1907,1179C1906,1178 1905,1176 1905,1175C1901,1167 1888,1150 1879,1141C1859,1123 1833,1108 1810,1104C1806,1103 1802,1102 1800,1101C1795,1100 1753,1100 1748,1101C1746,1102 1742,1103 1738,1104C1727,1106 1720,1108 1706,1116C1682,1128 1658,1149 1645,1172C1643,1175 1642,1178 1641,1179C1640,1180 1639,1183 1638,1186C1636,1190 1634,1194 1634,1196C1631,1201 1629,1208 1628,1216C1627,1220 1626,1224 1625,1224C1625,1225 1624,1309 1624,1412L1624,1598L1564,1599L1505,1599L1504,1597ZM2485,1478C2488,1478 2492,1477 2495,1476C2498,1476 2502,1475 2505,1474C2508,1473 2512,1472 2512,1472C2513,1472 2516,1471 2519,1470C2521,1469 2525,1467 2526,1466C2542,1460 2561,1449 2574,1438C2587,1428 2606,1406 2614,1394C2619,1384 2623,1377 2624,1375C2625,1374 2626,1370 2627,1368C2631,1359 2632,1357 2634,1352C2641,1330 2645,1304 2644,1286C2643,1274 2640,1249 2638,1246C2638,1245 2637,1243 2637,1240C2636,1237 2635,1233 2630,1220C2628,1216 2620,1201 2617,1194C2613,1187 2603,1173 2597,1166C2580,1148 2562,1134 2544,1125C2542,1123 2539,1122 2538,1121C2534,1119 2527,1116 2527,1116C2526,1116 2524,1115 2522,1114C2515,1111 2508,1109 2502,1108C2498,1107 2495,1106 2494,1106C2493,1105 2470,1102 2459,1102C2450,1101 2420,1104 2410,1106C2402,1109 2391,1112 2386,1114C2384,1115 2382,1116 2381,1116C2380,1116 2379,1117 2378,1118C2377,1118 2376,1119 2376,1119C2375,1119 2372,1121 2368,1122C2364,1124 2360,1126 2359,1127C2354,1130 2341,1139 2334,1145C2324,1153 2310,1168 2302,1178C2288,1196 2277,1220 2270,1242C2262,1271 2262,1311 2270,1339C2271,1343 2272,1346 2272,1346C2272,1347 2273,1350 2274,1353C2283,1376 2293,1394 2308,1412C2332,1441 2365,1463 2402,1474C2413,1477 2430,1480 2438,1480C2450,1481 2480,1480 2485,1478ZM4269,1478C4272,1478 4276,1477 4279,1476C4282,1476 4286,1475 4289,1474C4292,1473 4296,1472 4296,1472C4297,1472 4299,1471 4302,1470C4304,1469 4306,1468 4307,1468C4308,1468 4309,1467 4311,1467C4312,1466 4318,1463 4323,1460C4346,1450 4369,1431 4384,1412C4395,1399 4405,1383 4408,1375C4408,1374 4409,1372 4410,1371C4410,1370 4412,1366 4413,1363C4422,1342 4424,1330 4427,1302C4428,1290 4428,1282 4425,1260C4423,1250 4419,1234 4418,1232C4418,1232 4417,1230 4416,1228C4416,1226 4415,1223 4414,1221C4413,1219 4412,1217 4412,1216C4412,1215 4411,1214 4410,1213C4410,1212 4409,1211 4409,1211C4409,1208 4398,1188 4392,1181C4390,1178 4387,1174 4386,1172C4382,1168 4373,1158 4363,1149C4358,1144 4341,1132 4332,1126C4328,1124 4311,1116 4310,1116C4310,1116 4308,1115 4306,1114C4291,1108 4266,1103 4242,1102C4233,1101 4203,1104 4194,1106C4185,1109 4175,1112 4170,1114C4168,1115 4166,1116 4166,1116C4165,1116 4148,1124 4144,1126C4142,1128 4124,1139 4120,1142C4112,1149 4093,1168 4086,1179C4084,1181 4081,1185 4080,1187C4078,1189 4076,1192 4076,1194C4075,1195 4073,1198 4072,1200C4069,1205 4068,1206 4067,1209C4066,1210 4066,1212 4065,1213C4063,1216 4056,1234 4056,1236C4056,1236 4055,1239 4054,1243C4050,1258 4048,1271 4048,1291C4048,1324 4053,1346 4068,1376C4086,1412 4116,1442 4151,1459C4165,1467 4168,1468 4169,1468C4170,1468 4172,1469 4174,1470C4176,1471 4179,1472 4180,1472C4180,1472 4184,1473 4187,1474C4195,1476 4209,1479 4219,1480C4231,1481 4263,1480 4269,1478Z"/>
+<clipPath id="clF"><path d="M187,261 L176,286 L173,301 L168,308 L169,314 L164,319 L148,398 L151,499 L149,526 L152,532 L150,552 L153,599 L249,619 L357,634 L458,641 L566,641 L657,635 L738,625 L867,600 L870,597 L869,478 L873,451 L870,380 L867,377 L869,370 L857,321 L858,315 L849,286 L833,248 L799,205 L761,173 L708,143 L663,127 L623,117 L580,112 L539,103 L537,100 L543,90 L530,80 L485,82 L472,91 L472,97 L476,102 L467,108 L373,129 L319,146 L271,169 L245,188 L228,205 L201,238 Z"/></clipPath>
+</defs>
+</svg>
+
+<header class="band"><div class="wrap head">
+<div>
+<h1>Casquettes Nosho</h1>
+<p class="lead">Tous les coloris Retro Trucker du catalogue Falk&amp;Ross, avec le logo Nosho brodé sur la face avant. Glissez un logo sur une casquette, touchez-la pour changer la couleur du fil ou la taille, puis cliquez sur « Envoyer cette casquette » : la demande arrive chez Nosho avec l'image de votre casquette.</p>
+</div>
+<div class="figs" id="figs"></div>
+</div></header>
+
+<div class="bar band"><div class="wrap">
+<div class="tray" id="tray" aria-label="Logos à glisser"></div>
+<p class="hint" id="hint">Glissez un logo sur une casquette, ou touchez-le puis touchez la casquette.</p>
+<div class="filters" id="filters" role="group" aria-label="Filtrer"></div>
+</div></div>
+
+<main class="band"><div class="wrap">
+<div class="acts"><button id="auto">Remplir automatiquement</button><button id="clearall">Tout vider</button><button id="reset">Réinitialiser</button></div>
+<div class="grid" id="grid"></div>
+<p class="foot">Photos : la photo catalogue Falk&amp;Ross du Retro Trucker 2-Tone (Black/White), recolorée dans chaque coloris d'après les pastilles des fiches produit n° 306.73 et 307.73 (pastille à côté de chaque nom). Le modèle uni a la même forme, avec un filet de la même couleur. Les teintes réelles peuvent varier. Pour les 2-Tone, la première couleur est la face avant et la visière, la seconde le filet. Logo redessiné d'après le fichier de 2025, en attendant le fichier officiel.</p>
+</div></main>
+
+<div class="ghost" id="ghost" hidden></div>
+<div class="favbar band" id="favbar"><div class="wrap">
+<b id="favn"></b><span class="list" id="favlist"></span>
+<button id="openreq">Voir et envoyer</button>
+</div></div>
+<dialog id="req" aria-labelledby="reqt">
+<form id="reqf" novalidate>
+<div class="rh"><h2 id="reqt">Ma demande</h2><button type="button" class="ic" id="reqx" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<div id="reqlist" class="rl"></div>
+<div class="ff">
+<label for="f-prenom">Prénom<input id="f-prenom" name="prenom" autocomplete="given-name" maxlength="60"></label>
+<label for="f-nom">Nom<input id="f-nom" name="nom" autocomplete="family-name" maxlength="60"></label>
+<label for="f-email" class="w">E-mail, pour qu'on vous réponde<input id="f-email" name="email" type="email" autocomplete="email" maxlength="120"></label>
+<label for="f-msg" class="w">Message<textarea id="f-msg" name="message" rows="3" maxlength="1000" placeholder="Pour qui, pour quand, une précision…"></textarea></label>
+<label class="hp" aria-hidden="true">Site<input name="website" tabindex="-1" autocomplete="off"></label>
+</div>
+<p class="st" id="reqst" role="status"></p>
+<div class="ra"><button type="button" id="reqmore">Ajouter une autre casquette</button><button type="button" id="reqcopy" hidden>Copier la demande</button><button type="submit" id="reqsend" class="pri">Envoyer la demande</button></div>
+</form>
+</dialog>
+<div class="toast" id="toast" hidden><span id="toastt"></span><button id="undo">Annuler</button></div>
+
+<script>
+{
+const LOGO={"full": [604.0, 744.0, 3943.0, 979.0], "icon": [604.0, 864.0, 635.0, 859.0]};
+const OR='#FF900B',INK='#1E1E1C',WH='#FFFFFF',BK='#000000';
+const T2=[['Heather/White','#9FABB6','#FFFFFF',1],['Black/White','#000000','#FFFFFF'],['Heather/Black','#ACA6A3','#000000',1],['Dark Grey/White','#666666','#FFFFFF'],['Charcoal/Black','#4E4A49','#000000'],['Charcoal/Neon Green','#4E4A49','#AEC747'],['Charcoal/Neon Orange','#4E4A49','#FC7F25'],['Charcoal/Navy','#4E4A49','#202B3D'],['Black/Loden','#1C1C1A','#3F5139'],['Navy/White','#022A44','#FFFFFF'],['Navy/Silver','#202B3D','#B9B4B1'],['Navy/Greyish Brown','#1B4A68','#6A7F82'],['Steel Blue/Silver','#317197','#B9B4B1'],['Royal/White','#22529A','#FFFFFF'],['Red/Black','#B12727','#000000'],['Rustic Orange/Khaki','#F36E45','#C4A589'],['Maroon/Grey','#58252A','#6D696A'],['Evergreen/White','#35624E','#FFFFFF'],['Moss/Khaki','#5C5133','#C4A589'],['Khaki/White','#DBCBBC','#FFFFFF'],['Turquoise/White','#0294C7','#FFFFFF'],['Pale Khaki/Birch','#AD9E89','#D3CFD0'],['Brown/Khaki','#4C2516','#C4A589'],['Silver/White','#C0C0C0','#FFFFFF'],['Buck/White','#827E58','#FFFFFF'],['Caramel/Black','#AD633C','#000000'],['Coyote Brown/Black','#75513B','#000000']];
+const UN=[['White','#FFFFFF',1],['Black','#000000',1],['Dark Grey','#4E4A49',1],['Navy','#192D45',1],['Steelgrey','#828282'],['Light Navy','#286591'],['Heathernavy','#474656',0,1],['Dark Navy','#23232F'],['Red','#9A312E'],['Pink','#F8B1D1'],['Cranberry','#C22F3F'],['Maroon','#682D29'],['Evergreen','#346351'],['Buck','#5F5B52'],['Silver','#6E6C6D'],['Khaki','#C4A589'],['Caramel','#A45B3A']];
+const CAPS=[...T2.map((c,i)=>({id:'t'+i,model:'t',name:c[0],f:c[1],m:c[2],h:!!c[3]})),...UN.map((c,i)=>({id:'u'+i,model:'u',name:c[0],f:c[1],m:c[1],kids:!!c[2],h:!!c[3]}))];
+const BY=Object.fromEntries(CAPS.map(c=>[c.id,c]));
+const find=(m,n)=>CAPS.find(c=>c.model===m&&c.name===n).id;
+const PRE=new Set([...['Coyote Brown/Black','Black/White','Heather/White','Royal/White'].map(n=>find('t',n)),...['White','Dark Navy','Black','Buck'].map(n=>find('u',n))]);
+const MODEL={t:'2-Tone · 307.73',u:'Uni · 306.73'};
+
+/* thread colours: every colour of the catalogue, named */
+const TH=new Map([[OR,'orange Nosho'],[WH,'blanc'],[BK,'noir']]);
+T2.forEach(c=>{const [a,b]=c[0].split('/');if(!TH.has(c[1]))TH.set(c[1],a);if(!TH.has(c[2]))TH.set(c[2],b);});
+UN.forEach(c=>{if(!TH.has(c[1]))TH.set(c[1],c[0]);});
+const tname=h=>TH.get(h)||h;
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const lum=h=>{const n=parseInt(h.slice(1),16);return [n>>16&255,n>>8&255,n&255].map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);};
+const cr=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+const disp=h=>h===WH?'#F6F6F3':h===BK?'#161616':h;
+const monoAuto=f=>cr(INK,f)>cr(WH,f)?BK:WH;
+const auto=c=>cr(OR,c.f)>=2?{logo:cr(INK,c.f)>cr(WH,c.f)?'light':'dark',col:OR}:{logo:'mono',col:monoAuto(c.f)};
+const defCol=(c,t)=>t==='icon'?(cr(OR,c.f)>=2?OR:monoAuto(c.f)):monoAuto(c.f);
+
+const TYPES=[{id:'light',b:'Casquette claire',s:'orange + noir',sh:'Claire'},{id:'dark',b:'Casquette foncée',s:'orange + blanc',sh:'Foncée'},{id:'mono',b:'Un seul fil',s:'couleur au choix',sh:'Un fil'},{id:'icon',b:'Icône seule',s:'couleur au choix',sh:'Icône'}];
+const TB=Object.fromEntries(TYPES.map(t=>[t.id,t]));
+
+let uid=0;
+const mk=(cap,o)=>Object.assign({k:'c'+(uid++),cap,s:1,dx:0,dy:0,fav:false,dup:false},auto(BY[cap]),o||{});
+const initial=()=>{uid=0;const L=[];CAPS.forEach(c=>{L.push(mk(c.id));
+ if(c.model==='u'&&c.name==='Black')L.push(mk(c.id,{logo:'icon',col:OR,dup:true}));
+ if(c.model==='t'&&c.name==='Black/White')L.push(mk(c.id,{logo:'mono',col:WH,dup:true}));});return L;};
+
+const KEY='nosho-casquettes-v1';
+let S={cards:initial(),who:'',f:'all'};
+try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&Array.isArray(r.cards)&&r.cards.every(c=>BY[c.cap])){S=Object.assign(S,r);uid=S.cards.reduce((m,c)=>Math.max(m,+String(c.k).slice(1)+1||0),0);}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+let sel=null,armed=null,undoSnap=null;
+
+/* drawing */
+const CX=522,CY=468;
+const geo=cd=>{const icon=cd.logo==='icon',bb=icon?LOGO.icon:LOGO.full;const w=icon?200*cd.s*bb[2]/bb[3]:448*cd.s,h=w*bb[3]/bb[2];return {bb,w,h,k:w/bb[2],cx:CX+cd.dx,cy:CY+cd.dy};};
+const trOf=cd=>{const g=geo(cd);return `translate(${(g.cx-g.w/2).toFixed(1)} ${(g.cy-g.h/2).toFixed(1)}) scale(${g.k.toFixed(5)}) translate(${-g.bb[0]} ${-g.bb[1]})`;};
+const cols=cd=>cd.logo==='light'?[OR,INK]:cd.logo==='dark'?[OR,WH]:[cd.col,cd.col];
+const logoG=(cd,isSel,c)=>{
+ if(!cd.logo){const t=lum(c.f)>.3?'#000':'#fff';return `<g opacity=".5"><rect x="362" y="403" width="320" height="130" rx="24" fill="none" stroke="${t}" stroke-dasharray="14 12" stroke-width="5"/><text x="522" y="480" text-anchor="middle" font-size="34" font-family="Inter,sans-serif" fill="${t}">Déposer un logo</text></g>`;}
+ const g=geo(cd),[o,i]=cols(cd),icon=cd.logo==='icon';
+ return `<g clip-path="url(#clF)"><g class="lg" data-k="${cd.k}" transform="${trOf(cd)}">
+<g transform="translate(22 28)" opacity=".28"><use href="#lgO" fill="#000"/>${icon?'':'<use href="#lgI" fill="#000"/>'}</g>
+<use href="#lgO" fill="${disp(o)}"/>${icon?'':`<use href="#lgI" fill="${disp(i)}"/>`}
+<rect x="${g.bb[0]-90}" y="${g.bb[1]-90}" width="${g.bb[2]+180}" height="${g.bb[3]+180}" rx="60" fill="#000" fill-opacity="0" ${isSel?'stroke="#FF900B" stroke-width="2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"':''}/></g></g>`;};
+const mini=(t,col)=>{const icon=t==='icon',bb=icon?LOGO.icon:LOGO.full,[o,i]=t==='light'?[OR,INK]:t==='dark'?[OR,WH]:[col,col];
+ return `<svg viewBox="${bb[0]-60} ${bb[1]-60} ${bb[2]+120} ${bb[3]+120}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><use href="#lgO" fill="${o}"/>${icon?'':`<use href="#lgI" fill="${i}"/>`}</svg>`;};
+const PVBG={light:'#FFFFFF',dark:'#14202B',mono:'#E9EDF1',icon:'#FFFFFF'};
+
+/* readability of the stitched logo on the front panel */
+const verdict=cd=>{const c=BY[cd.cap];if(!cd.logo)return ['none','Sans logo'];
+ const [o,i]=cols(cd);const v=cd.logo==='light'||cd.logo==='dark'?Math.min(cr(o,c.f),cr(i,c.f)):cr(o,c.f);
+ const d=cd.logo==='light'?'Fil orange + noir':cd.logo==='dark'?'Fil orange + blanc':(cd.logo==='icon'?'Icône, fil ':'Fil ')+tname(cd.col);
+ return v>=3?['ok',d+' · bien lisible']:v>=2?['mid',d+' · lisible']:['no',d+' · peu visible'];};
+
+const HEART='<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.6C1.3 8.4 3.2 5 6.6 5c2 0 3.4 1.1 4.2 2.4h2.4C14 6.1 15.4 5 17.4 5c3.4 0 5.3 3.4 3.8 6.4C19 15.6 12 20 12 20z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+const DUP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+const sw=(cd,h)=>`<button class="s" data-act="col" data-c="${h}" style="--c:${disp(h)}" aria-label="Fil ${esc(tname(h))}" title="${esc(tname(h))}" aria-pressed="${cd.col===h}"></button>`;
+const tools=cd=>{const c=BY[cd.cap],rec=cd.logo==='mono'||cd.logo==='icon';
+ const near=[...new Set([OR,WH,BK,c.f,c.m])],rest=[...TH.keys()].filter(h=>!near.includes(h));
+ return `<div class="tools">
+<div class="seg" role="group" aria-label="Logo">${TYPES.map(t=>`<button data-act="type" data-t="${t.id}" aria-pressed="${cd.logo===t.id}">${t.b}</button>`).join('')}</div>
+${rec?`<div><div class="lab">Couleur du fil</div><div class="sw">${near.map(h=>sw(cd,h)).join('')}</div><details><summary>Toutes les couleurs du catalogue (${rest.length})</summary><div class="sw">${rest.map(h=>sw(cd,h)).join('')}</div></details></div>`:''}
+${cd.logo?`<label class="size" for="sz-${cd.k}">Taille <input type="range" id="sz-${cd.k}" min="60" max="130" step="5" value="${Math.round(cd.s*100)}" data-act="size"><output>${Math.round(cd.s*100)} %</output></label>`:''}
+<div class="row">${cd.logo?'<button data-act="center">Recentrer</button><button data-act="clear">Retirer le logo</button>':''}${cd.dup?'<button data-act="del">Supprimer la variante</button>':''}</div></div>`;};
+const cardHTML=cd=>{const c=BY[cd.cap],isSel=sel===cd.k,[vl,vt]=verdict(cd);
+ return `<article class="card${isSel?' sel':''}" data-k="${cd.k}"><div class="stage" tabindex="0" aria-label="${esc(c.name)} : sélectionner"><div class="ph"><img src="caps/${cd.cap}.webp" alt="" width="640" height="584" loading="lazy" decoding="async"><svg class="ov" viewBox="0 0 1024 935" aria-hidden="true">${logoG(cd,isSel,c)}</svg></div></div>
+<div class="meta"><img class="swc" src="sw/${cd.cap}.jpg" alt="" width="28" height="21"><div class="nm"><b>${esc(c.name)}</b><span>${MODEL[c.model]}${c.kids?' · existe en taille enfant':''}${cd.dup?' · variante':''}</span></div>
+<button class="ic" data-act="dup" aria-label="Dupliquer pour comparer">${DUP}</button></div>
+<div class="chip ${vl}">${esc(vt)}</div><button class="send${cd.fav?' on':''}" data-act="send">${cd.fav?'Dans ma demande · voir':'Envoyer cette casquette'}</button>${isSel?tools(cd):''}</article>`;};
+
+const $=id=>document.getElementById(id);
+const grid=$('grid');
+const FILT=[['all','Tout'],['t','2-Tone'],['u','Uni'],['pre','Présélection'],['fav','Ma demande']];
+const shown=()=>S.cards.filter(cd=>{const c=BY[cd.cap];return S.f==='all'||(S.f==='fav'?cd.fav:S.f==='pre'?PRE.has(cd.cap):c.model===S.f);});
+const renderFilters=()=>{const n=f=>S.cards.filter(cd=>f==='all'||(f==='fav'?cd.fav:f==='pre'?PRE.has(cd.cap):BY[cd.cap].model===f)).length;
+ $('filters').innerHTML=FILT.map(([id,l])=>`<button data-f="${id}" aria-pressed="${S.f===id}">${l}<span>${n(id)}</span></button>`).join('');};
+const render=()=>{const L=shown();grid.innerHTML=L.length?L.map(cardHTML).join(''):`<p class="empty">${S.f==='fav'?'Votre demande est vide : cliquez sur « Envoyer cette casquette » sous celle qui vous plaît.':'Aucune casquette.'}</p>`;renderFilters();favbar();grid.classList.toggle('armed',!!armed);};
+const cardOf=k=>S.cards.find(c=>c.k===k);
+const redraw=k=>{const el=grid.querySelector(`.card[data-k="${k}"]`),cd=cardOf(k);if(el&&cd)el.outerHTML=cardHTML(cd);};
+const commit=k=>{save();k?redraw(k):render();renderFilters();favbar();};
+
+$('figs').innerHTML=[[T2.length,'coloris 2-Tone'],[UN.length,'coloris unis'],[UN.filter(u=>u[2]).length,'aussi en enfant']].map(f=>`<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join('');
+$('tray').innerHTML=TYPES.map(t=>`<button class="lt" data-t="${t.id}" aria-pressed="false"><span class="pv" style="background:${PVBG[t.id]}">${mini(t.id,t.id==='mono'?'#14202B':OR)}</span><span><b>${t.b}</b><small>${t.s}</small><em>${t.sh}</em></span></button>`).join('');
+
+const apply=(k,t)=>{const cd=cardOf(k);if(!cd)return;const c=BY[cd.cap];
+ if((t==='mono'||t==='icon')&&!(cd.logo==='mono'||cd.logo==='icon'))cd.col=defCol(c,t);
+ if(t==='icon'&&cd.logo!=='icon'&&cd.logo!=='mono')cd.col=defCol(c,t);
+ cd.logo=t;cd.s=1;cd.dx=0;cd.dy=0;const prev=sel;sel=k;save();if(prev&&prev!==k)redraw(prev);redraw(k);};
+const arm=t=>{armed=armed===t?null:t;document.querySelectorAll('.lt').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===armed));
+ $('hint').innerHTML=armed?`<span class="armed-hint">Touchez une casquette pour y poser « ${esc(TB[armed].b)} ».</span>`:'Glissez un logo sur une casquette, ou touchez-le puis touchez la casquette.';grid.classList.toggle('armed',!!armed);};
+
+/* drag from the tray */
+const ghost=$('ghost');let drag=null,overEl=null;
+const cardAt=(x,y)=>{const e=document.elementFromPoint(x,y);return e&&e.closest('.card');};
+const over=el=>{if(overEl===el)return;overEl&&overEl.classList.remove('over');overEl=el;el&&el.classList.add('over');};
+const tray=$('tray');
+tray.addEventListener('pointerdown',e=>{const b=e.target.closest('.lt');if(!b||e.button>0)return;e.preventDefault();drag={t:b.dataset.t,x:e.clientX,y:e.clientY,moved:false};b.setPointerCapture(e.pointerId);});
+tray.addEventListener('pointermove',e=>{if(!drag)return;
+ if(!drag.moved&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>6){drag.moved=true;ghost.innerHTML=mini(drag.t,drag.t==='mono'?'#14202B':OR);ghost.style.background=PVBG[drag.t];ghost.hidden=false;}
+ if(drag.moved){ghost.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;over(cardAt(e.clientX,e.clientY));
+  if(e.clientY>innerHeight-70)scrollBy(0,14);else if(e.clientY<40)scrollBy(0,-14);}});
+const endDrag=(e,ok)=>{if(!drag)return;if(drag.moved){const el=ok&&cardAt(e.clientX,e.clientY);if(el)apply(el.dataset.k,drag.t);}else if(ok)arm(drag.t);ghost.hidden=true;over(null);drag=null;};
+tray.addEventListener('pointerup',e=>endDrag(e,true));
+tray.addEventListener('pointercancel',e=>endDrag(e,false));
+tray.addEventListener('click',e=>{const b=e.target.closest('.lt');if(b&&e.detail===0)arm(b.dataset.t);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&armed)arm(armed);});
+
+/* move a placed logo */
+let mv=null;
+grid.addEventListener('pointerdown',e=>{const g=e.target.closest('.lg');if(!g||armed)return;const k=g.dataset.k,cd=cardOf(k),svg=g.ownerSVGElement;e.preventDefault();
+ mv={k,g,x:e.clientX,y:e.clientY,dx:cd.dx,dy:cd.dy,r:1024/svg.getBoundingClientRect().width,moved:false};g.setPointerCapture(e.pointerId);});
+grid.addEventListener('pointermove',e=>{if(!mv)return;const cd=cardOf(mv.k);const ddx=(e.clientX-mv.x)*mv.r,ddy=(e.clientY-mv.y)*mv.r;if(Math.hypot(ddx,ddy)>2)mv.moved=true;
+ cd.dx=Math.max(-230,Math.min(230,mv.dx+ddx));cd.dy=Math.max(-230,Math.min(110,mv.dy+ddy));if(Math.abs(cd.dx)<14)cd.dx=0;if(Math.abs(cd.dy)<14)cd.dy=0;mv.g.setAttribute('transform',trOf(cd));});
+const endMv=()=>{if(!mv)return;const k=mv.k,moved=mv.moved;mv=null;save();if(!moved||sel!==k){const prev=sel;sel=k;if(prev&&prev!==k)redraw(prev);redraw(k);}};
+grid.addEventListener('pointerup',endMv);grid.addEventListener('pointercancel',endMv);
+
+/* clicks inside the grid */
+grid.addEventListener('click',e=>{const card=e.target.closest('.card');if(!card)return;const k=card.dataset.k,cd=cardOf(k);
+ if(armed&&e.target.closest('.stage')){apply(k,armed);arm(armed);return;}
+ const b=e.target.closest('[data-act]');
+ if(!b){if(e.target.closest('.tools')||e.target.closest('.lg'))return;const prev=sel;sel=sel===k?null:k;if(prev&&prev!==k)redraw(prev);redraw(k);return;}
+ const a=b.dataset.act;
+ if(a==='send'){if(!cd.fav){cd.fav=true;cd.q=cd.q||1;save();redraw(k);renderFilters();favbar();}openReq();}
+ else if(a==='dup'){const i=S.cards.indexOf(cd),n=Object.assign({},cd,{k:'c'+(uid++),fav:false,dup:true});S.cards.splice(i+1,0,n);sel=n.k;save();render();}
+ else if(a==='type')apply(k,b.dataset.t);
+ else if(a==='col'){cd.col=b.dataset.c;commit(k);}
+ else if(a==='center'){cd.dx=0;cd.dy=0;cd.s=1;commit(k);}
+ else if(a==='clear'){cd.logo=null;commit(k);}
+ else if(a==='del'){S.cards.splice(S.cards.indexOf(cd),1);sel=null;save();render();}});
+grid.addEventListener('input',e=>{const r=e.target.closest('[data-act=size]');if(!r)return;const k=r.closest('.card').dataset.k,cd=cardOf(k);cd.s=r.value/100;r.nextElementSibling.textContent=r.value+' %';
+ const g=grid.querySelector(`.lg[data-k="${k}"]`);if(g)g.setAttribute('transform',trOf(cd));save();});
+grid.addEventListener('change',e=>{const r=e.target.closest('[data-act=size]');if(r)redraw(r.closest('.card').dataset.k);});
+
+grid.addEventListener('keydown',e=>{const st=e.target.closest('.stage');if(!st||(e.key!=='Enter'&&e.key!==' '))return;e.preventDefault();const k=st.closest('.card').dataset.k;
+ if(armed){apply(k,armed);arm(armed);}else{const prev=sel;sel=sel===k?null:k;if(prev&&prev!==k)redraw(prev);redraw(k);}
+ const n=grid.querySelector(`.card[data-k="${k}"] .stage`);n&&n.focus();});
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;S.f=b.dataset.f;save();render();});
+
+/* bulk actions with undo */
+const toast=(t)=>{$('toastt').textContent=t;$('toast').hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>{$('toast').hidden=true;},6000);};
+const bulk=(fn,msg)=>{undoSnap=JSON.stringify(S);fn();sel=null;save();render();toast(msg);};
+$('auto').onclick=()=>bulk(()=>S.cards.forEach(cd=>{if(!cd.dup)Object.assign(cd,auto(BY[cd.cap]),{s:1,dx:0,dy:0});}),'Logo conseillé posé sur chaque coloris.');
+$('clearall').onclick=()=>bulk(()=>S.cards.forEach(cd=>cd.logo=null),'Toutes les casquettes ont été vidées.');
+$('reset').onclick=()=>bulk(()=>{S.cards=initial();S.f='all';},'Page remise à zéro.');
+$('undo').onclick=()=>{if(!undoSnap)return;S=JSON.parse(undoSnap);undoSnap=null;$('toast').hidden=true;save();render();};
+
+/* request: pick caps, then send them to Nosho */
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyEYQ9OynmymjUrtKGUQ_YnVr28ZGuSYfElnRz7D9iZkK_D7ve3zxycwiCiWfjgdUdU3A/exec'; /* URL /exec du script Google Apps Script */
+const REQ=()=>S.cards.filter(c=>c.fav);
+const MOD=c=>c.model==='t'?'Retro Trucker 2-Tone':'Retro Trucker';
+const REF=c=>c.model==='t'?'307.73':'306.73';
+const logoTxt=cd=>cd.logo==='light'?'Orange + noir (casquette claire)':cd.logo==='dark'?'Orange + blanc (casquette foncée)':cd.logo==='mono'?'Un seul fil, '+tname(cd.col):cd.logo==='icon'?'Icône seule, fil '+tname(cd.col):'Sans logo';
+const posTxt=cd=>{if(!cd.dx&&!cd.dy)return 'centré';const h=cd.dx>0?'droite':cd.dx<0?'gauche':'',v=cd.dy>0?'bas':cd.dy<0?'haut':'';return 'décalé vers '+[h,v].filter(Boolean).join(' et ');};
+const sizeTxt=(cd,c)=>c.kids&&cd.kid?'Enfant 54 cm':'Adulte';
+const line=cd=>{const c=BY[cd.cap];return `${cd.q||1} × ${MOD(c)} (${REF(c)}) · ${c.name} · logo ${logoTxt(cd)} · taille du logo ${Math.round(cd.s*100)} % · ${posTxt(cd)} · ${sizeTxt(cd,c)}`;};
+const favbar=()=>{const F=REQ(),n=F.reduce((s,c)=>s+(c.q||1),0);$('favbar').classList.toggle('on',F.length>0);$('favn').textContent=`Ma demande : ${n} casquette${n>1?'s':''}`;$('favlist').textContent=F.map(cd=>BY[cd.cap].name).join(', ');};
+
+/* render one cap as a JPEG, as drawn on screen */
+const P={};
+const paths=()=>{if(!P.o){P.o=new Path2D($('lgO').getAttribute('d'));P.i=new Path2D($('lgI').getAttribute('d'));P.c=new Path2D(document.querySelector('#clF path').getAttribute('d'));}return P;};
+const IMG={};
+const loadImg=src=>IMG[src]||(IMG[src]=new Promise((ok,ko)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=()=>{delete IMG[src];ko(new Error('image'));};i.src=src;}));
+const renderJPG=async(cd,W)=>{const H=Math.round(W*935/1024),s=W/1024,cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d');
+ x.fillStyle='#ffffff';x.fillRect(0,0,W,H);x.drawImage(await loadImg(`caps/${cd.cap}.webp`),0,0,W,H);
+ if(cd.logo){const g=geo(cd),[o,i]=cols(cd),icon=cd.logo==='icon',p=paths();x.save();x.scale(s,s);x.clip(p.c);
+  const draw=(dx,dy,fo,fi)=>{x.save();x.translate(g.cx-g.w/2,g.cy-g.h/2);x.scale(g.k,g.k);x.translate(-g.bb[0]+dx,-g.bb[1]+dy);x.fillStyle=fo;x.fill(p.o);if(!icon){x.fillStyle=fi;x.fill(p.i);}x.restore();};
+  draw(22,28,'rgba(0,0,0,.28)','rgba(0,0,0,.28)');draw(0,0,disp(o),disp(i));x.restore();}
+ return cv.toDataURL('image/jpeg',.86);};
+
+const dlg=$('req'),form=$('reqf'),st=$('reqst');
+const status=(m,cls)=>{st.textContent=m;st.className='st'+(cls?' '+cls:'');};
+const reqRow=cd=>{const c=BY[cd.cap];return `<div class="ri"><img alt="${esc(c.name)}" data-r="${cd.k}"><div><b>${esc(c.name)}</b><span>${MOD(c)} · ${REF(c)}</span><span>${esc(logoTxt(cd))} · logo ${Math.round(cd.s*100)} % · ${esc(posTxt(cd))}</span>
+<div class="rq"><label>Quantité <input type="number" min="1" max="500" step="1" inputmode="numeric" value="${cd.q||1}" data-q="${cd.k}" aria-label="Quantité ${esc(c.name)}"></label>${c.kids?`<label>Taille <select data-kid="${cd.k}"><option value="0"${cd.kid?'':' selected'}>Adulte</option><option value="1"${cd.kid?' selected':''}>Enfant 54 cm</option></select></label>`:''}<button type="button" class="lnk" data-rm="${cd.k}">Retirer</button></div></div></div>`;};
+const fillList=()=>{const F=REQ();$('reqlist').innerHTML=F.length?F.map(reqRow).join(''):'<p class="empty">Votre demande est vide : choisissez une casquette puis cliquez sur « Envoyer cette casquette ».</p>';
+ $('reqsend').disabled=!F.length;
+ F.forEach(cd=>renderJPG(cd,240).then(u=>{const im=$('reqlist').querySelector(`img[data-r="${cd.k}"]`);if(im)im.src=u;}).catch(()=>{}));};
+const openReq=()=>{fillList();status('');$('reqcopy').hidden=true;const me=S.me||{};form.prenom.value=me.p||'';form.nom.value=me.n||'';form.email.value=me.e||'';if(!dlg.open)dlg.showModal();};
+$('openreq').onclick=openReq;
+$('reqx').onclick=()=>dlg.close();
+$('reqmore').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+$('reqlist').addEventListener('input',e=>{const q=e.target.closest('[data-q]');if(!q)return;const cd=cardOf(q.dataset.q);const v=Math.max(1,Math.min(500,parseInt(q.value,10)||1));cd.q=v;save();favbar();});
+$('reqlist').addEventListener('change',e=>{const s=e.target.closest('[data-kid]');if(s){cardOf(s.dataset.kid).kid=s.value==='1';save();}const q=e.target.closest('[data-q]');if(q)q.value=cardOf(q.dataset.q).q||1;});
+$('reqlist').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(!b)return;const cd=cardOf(b.dataset.rm);cd.fav=false;save();redraw(cd.k);renderFilters();favbar();fillList();});
+form.addEventListener('input',e=>{const n=e.target.name;if(n==='prenom'||n==='nom'||n==='email'){S.me=Object.assign(S.me||{},{[n[0]]:e.target.value});save();}});
+const reqText=()=>`Demande de casquettes Nosho\nDe : ${form.prenom.value.trim()} ${form.nom.value.trim()} (${form.email.value.trim()})\n`+REQ().map(cd=>'- '+line(cd)).join('\n')+(form.message.value.trim()?`\nMessage : ${form.message.value.trim()}`:'');
+$('reqcopy').onclick=async()=>{const b=$('reqcopy');try{await navigator.clipboard.writeText(reqText());b.textContent='Copié';}catch(err){b.textContent='Copie refusée';}setTimeout(()=>b.textContent='Copier la demande',1800);};
+form.addEventListener('submit',async e=>{e.preventDefault();const F=REQ();if(!F.length)return;
+ if(!form.prenom.value.trim()){status('Indiquez votre prénom.','err');form.prenom.focus();return;}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())){status('Indiquez une adresse e-mail valide, pour qu’on puisse vous répondre.','err');form.email.focus();return;}
+ if(!/^(https:\/\/|http:\/\/localhost)/.test(ENDPOINT)){status('L’envoi direct n’est pas branché sur cette version de la page : copiez la demande et envoyez-la par message.','err');$('reqcopy').hidden=false;return;}
+ const btn=$('reqsend');btn.disabled=true;status('Préparation des images…');
+ try{const items=[];for(const cd of F){const c=BY[cd.cap];items.push({modele:MOD(c),ref:REF(c),coloris:c.name,logo:logoTxt(cd),taille_logo:Math.round(cd.s*100)+' %',position:posTxt(cd),taille:sizeTxt(cd,c),quantite:cd.q||1,image:await renderJPG(cd,720)});}
+  status('Envoi…');
+  const r=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify({prenom:form.prenom.value.trim(),nom:form.nom.value.trim(),email:form.email.value.trim(),message:form.message.value.trim(),website:form.website.value,page:location.href,items})});
+  const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.error||('erreur '+r.status));
+  F.forEach(cd=>{cd.fav=false;});form.message.value='';save();render();$('reqlist').innerHTML='';status('Demande envoyée. Merci ! Nosho revient vers vous très vite.','ok');
+ }catch(err){status('L’envoi n’a pas abouti. Copiez la demande et envoyez-la par message, ou réessayez.','err');$('reqcopy').hidden=false;btn.disabled=false;}});
+
+render();
+}
+</script>
+</body>
+</html>
